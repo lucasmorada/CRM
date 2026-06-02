@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRM UpLife — Gestão de Leads</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#2563eb"/>
+          <path d="M8 22 L16 10 L24 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="16" cy="10" r="2" fill="#facc15"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">UpLife CRM</span>
+        <span class="brand-sub">Gestão de Leads, Atendimento e Matrículas</span>
+      </div>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="search-wrap">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar por nome, telefone ou curso…" />
+      </div>
+      <select id="filterOrigin" class="filter-select">
+        <option value="">Todas as origens</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Site">Site</option>
+        <option value="Indicação">Indicação</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Presencial">Presencial</option>
+      </select>
+      <select id="filterResponsible" class="filter-select">
+        <option value="">Todos os responsáveis</option>
+        <option value="Ana Lima">Ana Lima</option>
+        <option value="Carlos Souza">Carlos Souza</option>
+        <option value="Fernanda Reis">Fernanda Reis</option>
+        <option value="João Silva">João Silva</option>
+      </select>
+      <select id="filterStatus" class="filter-select">
+        <option value="">Todos os status</option>
+        <option value="Novo">Novo</option>
+        <option value="Em atendimento">Em atendimento</option>
+        <option value="Sem resposta">Sem resposta</option>
+        <option value="Quente">Quente</option>
+        <option value="Frio">Frio</option>
+        <option value="Convertido">Convertido</option>
+      </select>
+    </div>
+
+    <div class="topbar-metrics">
+      <div class="metric-pill">
+        <span class="metric-value" id="totalLeads">0</span>
+        <span class="metric-label">Leads</span>
+      </div>
+      <div class="metric-pill success">
+        <span class="metric-value" id="totalMatriculados">0</span>
+        <span class="metric-label">Matriculados</span>
+      </div>
+      <div class="metric-pill warning">
+        <span class="metric-value" id="taxaConversao">0%</span>
+        <span class="metric-label">Conversão</span>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="btn-simulate" id="btnSimulate">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Simular WhatsApp
+      </button>
+      <button class="btn-primary" id="btnAddLead">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Adicionar Lead
+      </button>
+    </div>
+  </header>
+
+  <!-- METRICS STRIP -->
+  <div class="metrics-strip">
+    <div class="metric-card">
+      <div class="metric-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_total">0</span>
+        <span class="m-label">Total de Leads</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon yellow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_hoje">0</span>
+        <span class="m-label">Novos Hoje</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 5.39 5.39l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 15.92z"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_atendimento">0</span>
+        <span class="m-label">Em Atendimento</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon orange"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_pagamento">0</span>
+        <span class="m-label">Aguard. Pagamento</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_matriculados">0</span>
+        <span class="m-label">Matriculados</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_sem_resposta">0</span>
+        <span class="m-label">Sem Resposta</span>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon blue"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <div class="metric-info">
+        <span class="m-value" id="m_conversao">0%</span>
+        <span class="m-label">Taxa de Conversão</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KANBAN BOARD -->
+  <main class="kanban-wrapper">
+    <div class="kanban-board" id="kanbanBoard">
+      <!-- Colunas geradas pelo JS -->
+    </div>
+  </main>
+
+  <!-- AUTOMAÇÕES PREVISTAS -->
+  <section class="automations-section">
+    <div class="section-header">
+      <h3>⚡ Automações Previstas</h3>
+      <span class="badge-preview">Integração n8n + WhatsApp</span>
+    </div>
+    <div class="automations-grid">
+      <div class="automation-card">
+        <div class="auto-icon green">📩</div>
+        <div class="auto-info">
+          <strong>Novo lead via WhatsApp</strong>
+          <span>Criar card automaticamente no funil</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon blue">👋</div>
+        <div class="auto-info">
+          <strong>Primeiro Contato</strong>
+          <span>Enviar mensagem de boas-vindas</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon yellow">📋</div>
+        <div class="auto-info">
+          <strong>Documentação/Matrícula</strong>
+          <span>Avisar equipe responsável</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon orange">💳</div>
+        <div class="auto-info">
+          <strong>Aguardando Pagamento</strong>
+          <span>Criar lembrete de cobrança</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon green">🎓</div>
+        <div class="auto-info">
+          <strong>Matriculado</strong>
+          <span>Registrar conversão e parabenizar</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon red">🔁</div>
+        <div class="auto-info">
+          <strong>Sem Resposta</strong>
+          <span>Criar tarefa de retorno automático</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon blue">🔥</div>
+        <div class="auto-info">
+          <strong>Lead Quente</strong>
+          <span>Destacar no funil e notificar equipe</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL ADD/EDIT LEAD -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="leadModal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Novo Lead</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="leadId" />
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome *</label>
+            <input type="text" id="fName" placeholder="Nome completo" />
+          </div>
+          <div class="form-group">
+            <label>Telefone *</label>
+            <input type="text" id="fPhone" placeholder="41999999999" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Curso de Interesse</label>
+            <input type="text" id="fCourse" placeholder="Ex: Técnico em Segurança do Trabalho" />
+          </div>
+          <div class="form-group">
+            <label>Origem</label>
+            <select id="fOrigin">
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Site">Site</option>
+              <option value="Indicação">Indicação</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Presencial">Presencial</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Responsável</label>
+            <select id="fResponsible">
+              <option value="Ana Lima">Ana Lima</option>
+              <option value="Carlos Souza">Carlos Souza</option>
+              <option value="Fernanda Reis">Fernanda Reis</option>
+              <option value="João Silva">João Silva</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="fStatus">
+              <option value="Novo">Novo</option>
+              <option value="Em atendimento">Em atendimento</option>
+              <option value="Sem resposta">Sem resposta</option>
+              <option value="Quente">Quente</option>
+              <option value="Frio">Frio</option>
+              <option value="Convertido">Convertido</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Etapa no Funil</label>
+          <select id="fStage">
+            <option value="Leads de Entrada">Leads de Entrada</option>
+            <option value="Primeiro Contato">Primeiro Contato</option>
+            <option value="Interessado">Interessado</option>
+            <option value="Em Atendimento">Em Atendimento</option>
+            <option value="Documentação/Matrícula">Documentação/Matrícula</option>
+            <option value="Aguardando Pagamento">Aguardando Pagamento</option>
+            <option value="Matriculado">Matriculado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tags</label>
+          <div class="tags-select" id="tagsSelect">
+            <span class="tag-toggle" data-tag="Urgente">🔴 Urgente</span>
+            <span class="tag-toggle" data-tag="Retornar">🔁 Retornar</span>
+            <span class="tag-toggle" data-tag="Documentação">📋 Documentação</span>
+            <span class="tag-toggle" data-tag="Pagamento">💳 Pagamento</span>
+            <span class="tag-toggle" data-tag="Bolsa">🎓 Bolsa</span>
+            <span class="tag-toggle" data-tag="WhatsApp">💬 WhatsApp</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Observações</label>
+          <textarea id="fNotes" rows="3" placeholder="Observações internas sobre o lead…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Última Mensagem</label>
+          <input type="text" id="fLastMessage" placeholder="Última mensagem recebida" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="cancelModal">Cancelar</button>
+        <button class="btn-primary" id="saveModal">Salvar Lead</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETALHES DO LEAD -->
+  <div class="modal-overlay" id="detailsOverlay">
+    <div class="modal modal-lg" id="detailsModal">
+      <div class="modal-header">
+        <div>
+          <h2 id="detailName">—</h2>
+          <span id="detailStage" class="stage-badge-header"></span>
+        </div>
+        <button class="modal-close" id="detailsClose">&times;</button>
+      </div>
+      <div class="details-layout">
+        <div class="details-left">
+          <div class="detail-section">
+            <h4>Dados do Lead</h4>
+            <div class="detail-grid">
+              <div class="detail-item"><span class="detail-label">Telefone</span><span id="dPhone">—</span></div>
+              <div class="detail-item"><span class="detail-label">Curso</span><span id="dCourse">—</span></div>
+              <div class="detail-item"><span class="detail-label">Origem</span><span id="dOrigin">—</span></div>
+              <div class="detail-item"><span class="detail-label">Responsável</span><span id="dResponsible">—</span></div>
+              <div class="detail-item"><span class="detail-label">Status</span><span id="dStatus">—</span></div>
+              <div class="detail-item"><span class="detail-label">Última Interação</span><span id="dLastInteraction">—</span></div>
+            </div>
+          </div>
+          <div class="detail-section">
+            <h4>Tags</h4>
+            <div id="dTags" class="detail-tags"></div>
+          </div>
+          <div class="detail-section">
+            <h4>Observações</h4>
+            <p id="dNotes" class="detail-notes-text">Nenhuma observação.</p>
+          </div>
+          <div class="detail-section">
+            <h4>Adicionar Observação</h4>
+            <div class="obs-add">
+              <textarea id="newObsInput" rows="2" placeholder="Nova observação interna…"></textarea>
+              <button class="btn-primary btn-sm" id="addObsBtn">Adicionar</button>
+            </div>
+          </div>
+          <div class="detail-actions">
+            <button class="btn-whatsapp" id="openWhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Abrir no WhatsApp
+            </button>
+            <button class="btn-ghost btn-sm" id="copyPhone">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar Telefone
+            </button>
+            <select id="changeStatus" class="filter-select" style="flex:1">
+              <option value="">Alterar Status…</option>
+              <option value="Novo">Novo</option>
+              <option value="Em atendimento">Em atendimento</option>
+              <option value="Sem resposta">Sem resposta</option>
+              <option value="Quente">Quente</option>
+              <option value="Frio">Frio</option>
+              <option value="Convertido">Convertido</option>
+            </select>
+          </div>
+        </div>
+        <div class="details-right">
+          <div class="detail-section">
+            <h4>💬 Mensagens do WhatsApp</h4>
+            <div id="dMessages" class="messages-list"></div>
+          </div>
+          <div class="detail-section">
+            <h4>📋 Histórico de Movimentação</h4>
+            <div id="dMovements" class="movements-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
