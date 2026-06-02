@@ -11,13 +11,13 @@
 // ============================================================
 
 const STAGES = [
-  { id: 'Leads de Entrada',      colorClass: 'col-entrada',    icon: '📥', color: '#3b82f6' },
-  { id: 'Primeiro Contato',      colorClass: 'col-contato',    icon: '👋', color: '#8b5cf6' },
-  { id: 'Interessado',           colorClass: 'col-interesse',  icon: '⭐', color: '#f59e0b' },
-  { id: 'Em Atendimento',        colorClass: 'col-atendimento',icon: '📞', color: '#0ea5e9' },
-  { id: 'Documentação/Matrícula',colorClass: 'col-doc',        icon: '📋', color: '#ec4899' },
-  { id: 'Aguardando Pagamento',  colorClass: 'col-pagamento',  icon: '💳', color: '#f97316' },
-  { id: 'Matriculado',           colorClass: 'col-matriculado',icon: '🎓', color: '#22c55e' },
+  { id: 'Leads de Entrada',      colorClass: 'col-entrada',    icon: '', color: '#3b82f6' },
+  { id: 'Primeiro Contato',      colorClass: 'col-contato',    icon: '', color: '#8b5cf6' },
+  { id: 'Interessado',           colorClass: 'col-interesse',  icon: '', color: '#f59e0b' },
+  { id: 'Em Atendimento',        colorClass: 'col-atendimento',icon: '', color: '#0ea5e9' },
+  { id: 'Documentação/Matrícula',colorClass: 'col-doc',        icon: '', color: '#ec4899' },
+  { id: 'Aguardando Pagamento',  colorClass: 'col-pagamento',  icon: '', color: '#f97316' },
+  { id: 'Matriculado',           colorClass: 'col-matriculado',icon: '', color: '#22c55e' },
 ];
 
 const TAGS_ALL = ['Urgente','Retornar','Documentação','Pagamento','Bolsa','WhatsApp'];
@@ -58,7 +58,7 @@ const FAKE_LEADS = [
     ]
   },
   {
-    
+
   }
 ];
 
@@ -523,7 +523,7 @@ function openLeadDetails(id) {
     msgsEl.innerHTML = lead.messages.map(m => `
       <div class="message-bubble">
         <div class="msg-text">${m.text}</div>
-        <div class="msg-time">${formatDate(m.received_at)} · ${m.direction === 'in' ? '📩 Recebida' : '📤 Enviada'}</div>
+        <div class="msg-time">${formatDate(m.received_at)} · ${m.direction === 'in' ? ' Recebida' : ' Enviada'}</div>
       </div>
     `).join('');
   }
