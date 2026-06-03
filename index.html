@@ -71,6 +71,11 @@
         <span class="metric-value" id="taxaConversao">0%</span>
         <span class="metric-label">Conversão</span>
       </div>
+      <!-- Indicador de conexão Supabase -->
+      <div class="metric-pill" id="supabaseStatus" title="Status da conexão com Supabase">
+        <span id="supabaseDot" style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block;flex-shrink:0"></span>
+        <span class="metric-label" id="supabaseLabel">Supabase</span>
+      </div>
     </div>
 
     <div class="topbar-actions">
@@ -145,6 +150,71 @@
     </div>
   </main>
 
+  <!-- AUTOMAÇÕES PREVISTAS -->
+  <section class="automations-section">
+    <div class="section-header">
+      <h3>⚡ Automações Previstas</h3>
+      <span class="badge-preview">Integração n8n + WhatsApp</span>
+    </div>
+    <div class="automations-grid">
+      <div class="automation-card">
+        <div class="auto-icon green">📩</div>
+        <div class="auto-info">
+          <strong>Novo lead via WhatsApp</strong>
+          <span>Criar card automaticamente no funil</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon blue">👋</div>
+        <div class="auto-info">
+          <strong>Primeiro Contato</strong>
+          <span>Enviar mensagem de boas-vindas</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon yellow">📋</div>
+        <div class="auto-info">
+          <strong>Documentação/Matrícula</strong>
+          <span>Avisar equipe responsável</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon orange">💳</div>
+        <div class="auto-info">
+          <strong>Aguardando Pagamento</strong>
+          <span>Criar lembrete de cobrança</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon green">🎓</div>
+        <div class="auto-info">
+          <strong>Matriculado</strong>
+          <span>Registrar conversão e parabenizar</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon red">🔁</div>
+        <div class="auto-info">
+          <strong>Sem Resposta</strong>
+          <span>Criar tarefa de retorno automático</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+      <div class="automation-card">
+        <div class="auto-icon blue">🔥</div>
+        <div class="auto-info">
+          <strong>Lead Quente</strong>
+          <span>Destacar no funil e notificar equipe</span>
+        </div>
+        <span class="auto-badge planned">Planejado</span>
+      </div>
+    </div>
+  </section>
 
   <!-- MODAL ADD/EDIT LEAD -->
   <div class="modal-overlay" id="modalOverlay">
@@ -186,10 +256,10 @@
           <div class="form-group">
             <label>Responsável</label>
             <select id="fResponsible">
-              <option value="Ana Lima">Lucas</option>
-              <option value="Carlos Souza">Suellen</option>
-              <option value="Fernanda Reis">Jeverson</option>
-              <option value="João Silva">Julia</option>
+              <option value="Ana Lima">Ana Lima</option>
+              <option value="Carlos Souza">Carlos Souza</option>
+              <option value="Fernanda Reis">Fernanda Reis</option>
+              <option value="João Silva">João Silva</option>
             </select>
           </div>
           <div class="form-group">
@@ -219,12 +289,12 @@
         <div class="form-group">
           <label>Tags</label>
           <div class="tags-select" id="tagsSelect">
-            <span class="tag-toggle" data-tag="Urgente">Urgente</span>
-            <span class="tag-toggle" data-tag="Retornar">Retornar</span>
-            <span class="tag-toggle" data-tag="Documentação">Documentação</span>
-            <span class="tag-toggle" data-tag="Pagamento">Pagamento</span>
-            <span class="tag-toggle" data-tag="Bolsa">Bolsa</span>
-            <span class="tag-toggle" data-tag="WhatsApp">WhatsApp</span>
+            <span class="tag-toggle" data-tag="Urgente">🔴 Urgente</span>
+            <span class="tag-toggle" data-tag="Retornar">🔁 Retornar</span>
+            <span class="tag-toggle" data-tag="Documentação">📋 Documentação</span>
+            <span class="tag-toggle" data-tag="Pagamento">💳 Pagamento</span>
+            <span class="tag-toggle" data-tag="Bolsa">🎓 Bolsa</span>
+            <span class="tag-toggle" data-tag="WhatsApp">💬 WhatsApp</span>
           </div>
         </div>
         <div class="form-group">
@@ -303,11 +373,11 @@
         </div>
         <div class="details-right">
           <div class="detail-section">
-            <h4>Mensagens do WhatsApp</h4>
+            <h4>💬 Mensagens do WhatsApp</h4>
             <div id="dMessages" class="messages-list"></div>
           </div>
           <div class="detail-section">
-            <h4>Histórico de Movimentação</h4>
+            <h4>📋 Histórico de Movimentação</h4>
             <div id="dMovements" class="movements-list"></div>
           </div>
         </div>
@@ -315,6 +385,8 @@
     </div>
   </div>
 
+  <!-- SDK Supabase (deve vir ANTES do script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
 </body>
 </html>
