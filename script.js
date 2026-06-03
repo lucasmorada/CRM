@@ -56,7 +56,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_001', name: 'Mariana Costa', phone: '41991234001',
     course_interest: 'Técnico em Segurança do Trabalho', source: 'WhatsApp',
-    stage: 'Leads de Entrada', status: 'Novo', responsible: 'Ana Lima',
+    stage: 'Leads de Entrada', status: 'Novo', responsible: 'Lucas',
     notes: 'Lead veio pelo status do Instagram. Perguntou sobre bolsas.',
     last_message: 'Olá! Tenho interesse no curso de Segurança do Trabalho, podem me informar os valores?',
     last_interaction: '2026-06-02T09:15:00', created_at: '2026-06-02T09:00:00',
@@ -67,7 +67,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_002', name: 'Rafael Almeida', phone: '41991234002',
     course_interest: 'Técnico em Enfermagem', source: 'Instagram',
-    stage: 'Primeiro Contato', status: 'Em atendimento', responsible: 'Carlos Souza',
+    stage: 'Primeiro Contato', status: 'Em atendimento', responsible: 'Lucas',
     notes: 'Já mandei as informações do curso. Aguardando retorno.',
     last_message: 'Obrigado pelas informações! Vou pensar e te retorno.',
     last_interaction: '2026-06-01T14:22:00', created_at: '2026-05-30T10:00:00',
@@ -84,7 +84,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_003', name: 'Juliana Ferreira', phone: '41991234003',
     course_interest: 'Técnico em Administração', source: 'Site',
-    stage: 'Interessado', status: 'Quente', responsible: 'Fernanda Reis',
+    stage: 'Interessado', status: 'Quente', responsible: 'Lucas',
     notes: 'Muito interessada! Quer começar na próxima turma.',
     last_message: 'Adorei a proposta! Tenho interesse na bolsa de 20%. Como faço para reservar minha vaga?',
     last_interaction: '2026-06-02T08:00:00', created_at: '2026-05-28T09:00:00',
@@ -102,7 +102,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_004', name: 'Bruno Tavares', phone: '41991234004',
     course_interest: 'Técnico em Eletrotécnica', source: 'Indicação',
-    stage: 'Em Atendimento', status: 'Em atendimento', responsible: 'João Silva',
+    stage: 'Em Atendimento', status: 'Em atendimento', responsible: 'Lucas',
     notes: 'Indicado pelo Pedro. Reunião marcada para amanhã.',
     last_message: 'Sim, posso comparecer na reunião amanhã às 10h.',
     last_interaction: '2026-06-01T16:30:00', created_at: '2026-05-25T09:00:00',
@@ -121,7 +121,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_005', name: 'Carla Mendes', phone: '41991234005',
     course_interest: 'Técnico em Meio Ambiente', source: 'Facebook',
-    stage: 'Em Atendimento', status: 'Sem resposta', responsible: 'Ana Lima',
+    stage: 'Em Atendimento', status: 'Sem resposta', responsible: 'Lucas',
     notes: 'Ficou de enviar documentos mas não retornou.',
     last_message: 'Vou verificar os documentos aqui e te mando.',
     last_interaction: '2026-05-28T11:00:00', created_at: '2026-05-20T09:00:00',
@@ -140,7 +140,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_006', name: 'Diego Santos', phone: '41991234006',
     course_interest: 'Técnico em Informática', source: 'WhatsApp',
-    stage: 'Documentação/Matrícula', status: 'Em atendimento', responsible: 'Carlos Souza',
+    stage: 'Documentação/Matrícula', status: 'Em atendimento', responsible: 'Lucas',
     notes: 'Enviou RG e CPF. Falta comprovante de residência.',
     last_message: 'Enviei os documentos! Falta só o comprovante de residência.',
     last_interaction: '2026-06-01T10:00:00', created_at: '2026-05-15T09:00:00',
@@ -159,7 +159,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_007', name: 'Patrícia Lima', phone: '41991234007',
     course_interest: 'Técnico em Segurança do Trabalho', source: 'Presencial',
-    stage: 'Aguardando Pagamento', status: 'Quente', responsible: 'Fernanda Reis',
+    stage: 'Aguardando Pagamento', status: 'Quente', responsible: 'Lucas',
     notes: 'Boleto enviado. Aguardando pagamento da primeira parcela até dia 05.',
     last_message: 'Recebi o boleto. Vou pagar até sexta-feira!',
     last_interaction: '2026-06-01T15:00:00', created_at: '2026-05-10T09:00:00',
@@ -176,7 +176,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_008', name: 'Lucas Oliveira', phone: '41991234008',
     course_interest: 'Técnico em Contabilidade', source: 'Site',
-    stage: 'Aguardando Pagamento', status: 'Quente', responsible: 'João Silva',
+    stage: 'Aguardando Pagamento', status: 'Quente', responsible: 'Lucas',
     notes: 'Pediu parcelamento em 12x. Aprovado pelo financeiro.',
     last_message: 'Ótimo! Vou pagar a entrada hoje mesmo.',
     last_interaction: '2026-06-02T07:30:00', created_at: '2026-05-08T09:00:00',
@@ -193,7 +193,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_009', name: 'Amanda Rocha', phone: '41991234009',
     course_interest: 'Técnico em Enfermagem', source: 'WhatsApp',
-    stage: 'Matriculado', status: 'Convertido', responsible: 'Ana Lima',
+    stage: 'Matriculado', status: 'Convertido', responsible: 'Lucas',
     notes: 'Matriculada! Turma de julho/2026. Pagamento confirmado.',
     last_message: 'Pagamento confirmado! Muito obrigada pela atenção de todos 😊',
     last_interaction: '2026-05-31T16:00:00', created_at: '2026-05-01T09:00:00',
@@ -210,7 +210,7 @@ const FAKE_LEADS = [
   {
     id: 'lead_010', name: 'Fernando Gomes', phone: '41991234010',
     course_interest: 'Técnico em Eletrotécnica', source: 'Indicação',
-    stage: 'Matriculado', status: 'Convertido', responsible: 'Carlos Souza',
+    stage: 'Matriculado', status: 'Convertido', responsible: 'Lucas',
     notes: 'Matriculado via indicação. Turma agosto/2026.',
     last_message: 'Matriculado! Obrigado pela oportunidade.',
     last_interaction: '2026-05-29T11:00:00', created_at: '2026-04-25T09:00:00',
@@ -392,7 +392,7 @@ async function createLead(data) {
       source: data.source || 'WhatsApp',
       stage: data.stage || 'Leads de Entrada',
       status: data.status || 'Novo',
-      responsible: data.responsible || 'Ana Lima',
+      responsible: data.responsible || 'Lucas',
       notes: data.notes || '',
       last_message: data.last_message || '',
       last_interaction: now,
@@ -415,7 +415,7 @@ async function createLead(data) {
     source: data.source || 'WhatsApp',
     stage: data.stage || 'Leads de Entrada',
     status: data.status || 'Novo',
-    responsible: data.responsible || 'Ana Lima',
+    responsible: data.responsible || 'Lucas',
     notes: data.notes || '',
     last_message: data.last_message || '',
     last_interaction: now,
@@ -590,7 +590,7 @@ async function receiveLeadFromN8n(payload) {
         source: payload.source || 'WhatsApp',
         stage: 'Leads de Entrada',
         status: 'Novo',
-        responsible: 'Ana Lima',
+        responsible: 'Lucas',
         last_message: payload.message,
         tags: ['WhatsApp'],
       });
@@ -615,7 +615,7 @@ async function receiveLeadFromN8n(payload) {
         source: payload.source || 'WhatsApp',
         stage: 'Leads de Entrada',
         status: 'Novo',
-        responsible: 'Ana Lima',
+        responsible: 'Lucas',
         last_message: payload.message,
         tags: ['WhatsApp'],
         messages: [{ text: payload.message, direction: 'in', received_at: payload.received_at || now }],
