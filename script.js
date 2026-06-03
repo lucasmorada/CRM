@@ -12,7 +12,7 @@
 
 const SUPABASE_URL     = "https://ropuhydxmpoxpfvyrsiq.supabase.co";   // ← sua URL do Supabase
 const SUPABASE_ANON_KEY = "sb_publishable_r7n9Ijpb8LlM37nnln2rzQ_GBDqhcMD";                      // ← sua anon key (nunca service_role no front)
-const N8N_WEBHOOK_URL  = "https://SEU-N8N/webhook/up-life-crm"; // ← seu webhook no n8n
+const N8N_WEBHOOK_URL  = "https://suporteuplife.app.n8n.cloud/webhook/novo-lead-whatsapp-uplife"; // ← seu webhook no n8n
 
 // ============================================================
 // CLIENTE SUPABASE
